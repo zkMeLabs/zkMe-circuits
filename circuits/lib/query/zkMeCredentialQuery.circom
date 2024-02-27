@@ -28,7 +28,7 @@ template CredentialQuery(valueArraySize) {
     issuerClaim[1] === claimSchema;
 
     // Verify the expiration time of the issue
-    // timestamp < expirationComp.expiration
+    // timestamp <= expirationComp.expiration
     component lt = LessEqThan(252); 
     lt.in[0] <== timestamp;
     lt.in[1] <== issuerClaim[2];
@@ -39,6 +39,7 @@ template CredentialQuery(valueArraySize) {
     res.out === 1;
 
     // query
+    // the output will be checked outside
     component q = Query(valueArraySize);
     q.in <== issuerClaim[3];
     q.operator <== operator;
